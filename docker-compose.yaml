@@ -15,8 +15,8 @@ services:
     build:
       context: .
     hostname: openfire
-    environment:
-      TZ: "Asia/Jakarta"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     ports: 
       - 3478:3478
@@ -33,6 +33,4 @@ services:
       - 7777:7777
       - 9090:9090
       - 9091:9091
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
 
