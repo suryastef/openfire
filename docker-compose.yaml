@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+
+  postgres:
+    image: postgres:11-alpine
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/postgresql/data:/var/lib/postgresql/data
+      - $PWD/postgresql/backup-pgsql:/backup-pgsql
+    environment:
+      POSTGRES_PASSWORD: openfire
+
+  openfire:
+    build:
+      context: .
+    hostname: openfire
+    environment:
+      TZ: "Asia/Jakarta"
+    restart: unless-stopped
+    ports: 
+      - 3478:3478
+      - 3479:3479
+      - 5222:5222
+      - 5223:5223
+      - 5229:5229
+      - 5275:5275
+      - 5276:5276
+      - 5262:5262
+      - 5263:5263
+      - 7070:7070
+      - 7443:7443
+      - 7777:7777
+      - 9090:9090
+      - 9091:9091
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
